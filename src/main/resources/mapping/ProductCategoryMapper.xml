@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mooc.mapper.ProductCategoryMapper">
+    <insert id="addOne" parameterType="com.mooc.entity.ProductCategory">
+        insert into product_category (category_name,category_type) value (#{categoryName},#{categoryType})
+    </insert>
+    <update id="updOne" parameterType="com.mooc.entity.ProductCategory">
+        update product_category set category_name=#{categoryName},category_type=#{categoryType} where category_id=#{categoryId}
+    </update>
+    <delete id="delOne" parameterType="int">
+        delete from product_category where category_id=#{0}
+    </delete>
+    <select id="selOne" parameterType="int" resultType="com.mooc.entity.ProductCategory">
+        select * from product_category where category_id=#{0}
+    </select>
+    <select id="selByCategoryTypeList" resultType="com.mooc.entity.ProductCategory">
+        select * from product_category where category_type in
+        <foreach collection="categoryTypeList" item="item"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selAll" resultType="com.mooc.entity.ProductCategory">
+        select * from product_category
+    </select>
+</mapper>

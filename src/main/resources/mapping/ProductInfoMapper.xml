@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mooc.mapper.ProductInfoMapper">
+    <insert id="addOne">
+        INSERT INTO product_info (
+            product_id,
+            product_name,
+            product_price,
+            product_stock,
+            product_description,
+            product_icon,
+            product_status,
+            category_type
+        )
+        VALUE
+	    (
+            #{productId},
+            #{productName},
+            #{productPrice},
+            #{productStock},
+            #{productDescription},
+            #{productIcon},
+            #{productStatus},
+            #{categoryType}
+        )
+    </insert>
+    <update id="updOne">
+        UPDATE `product_info`
+        SET `product_name`=#{productName},
+            `product_price`= #{productPrice},
+            `product_stock`=#{productStock},
+            `product_description`= #{productDescription},
+            `product_icon`=#{productIcon},
+            `product_status`=#{productStatus},
+            `category_type`=#{categoryType}
+        WHERE (`product_id`= #{productId})
+    </update>
+    <select id="selOne" resultType="com.mooc.entity.ProductInfo">
+        select * from product_info where product_id=#{0}
+    </select>
+    <select id="selByProductStatus" resultType="com.mooc.entity.ProductInfo">
+        select * from product_info where product_status=#{0}
+    </select>
+    <select id="selAll" resultType="com.mooc.entity.ProductInfo">
+        select * from product_info
+    </select>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mooc.mapper.OrderMasterMapper">
+    <insert id="addOne">
+        INSERT INTO `order_master` (
+            `order_id`,
+            `buyer_name`,
+            `buyer_phone`,
+            `buyer_address`,
+            `buyer_openid`,
+            `order_amount`,
+            `wechat_order_no`
+        )
+        VALUES
+	    (
+            #{orderId},
+            #{buyerName},
+            #{buyerPhone},
+            #{buyerAddress},
+            #{buyerOpenid},
+            #{orderAmount},
+            #{wechatOrderNo}
+         )
+    </insert>
+    <update id="updOne">
+        UPDATE `order_master`
+            SET `buyer_name` = #{buyerName},
+             `buyer_phone` =  #{buyerPhone},
+             `buyer_address` = #{buyerAddress},
+             `buyer_openid` = #{buyerOpenid},
+             `order_amount` =  #{orderAmount},
+             `order_status` = #{orderStatus},
+             `pay_status` = #{payStatus},
+             `wechat_order_no`= #{wechatOrderNo}
+        WHERE
+            (
+                `order_id` = #{orderId}
+            )
+    </update>
+    <select id="selByOpenId" resultType="com.mooc.entity.OrderMaster">
+        select * from  order_master where buyer_openid=#{openid}
+    </select>
+    <select id="selOne" resultType="com.mooc.entity.OrderMaster">
+        select * from order_master where order_id=#{0}
+    </select>
+
+</mapper>
